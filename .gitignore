@@ -4,3 +4,4 @@ __pycache__/
 venv/
 *.zip
 .socat.pid
+DEMO_SCRIPT.md
