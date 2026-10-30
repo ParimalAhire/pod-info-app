@@ -34,7 +34,6 @@ Browser --> EC2 public IP:30080
 | `scripts/expose.sh` | Makes the NodePort reachable on the EC2 public IP |
 | `scripts/capture-evidence.sh` | Saves command outputs into `evidence/` |
 | `scripts/cleanup.sh` | Removes everything |
-| `DEMO_SCRIPT.md` | Timed narration for the recorded demo |
 
 ## Step-by-step on AWS
 
