@@ -1,4 +1,4 @@
-# CNDM IA-2: Containerization & Kubernetes Deployment
+# Containerization & Kubernetes Deployment
 
 A small Flask application ("Pod Info App") that is containerized with Docker and deployed on
 Kubernetes (minikube) running on a single AWS EC2 instance. The page shows which pod served the
