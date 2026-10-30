@@ -1,0 +1,93 @@
+
+######## kubectl get nodes ########
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION           CONTAINER-RUNTIME
+minikube   Ready    control-plane   12m   v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   7.0.0-1014-aws (amd64)   containerd://2.3.4
+
+######## kubectl get deployments ########
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS     IMAGES             SELECTOR
+pod-info-app   3/3     3            3           11m   pod-info-app   pod-info-app:1.0   app=pod-info-app
+
+######## kubectl get pods -o wide ########
+NAME                            READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod-info-app-5b77d876fd-8slxz   1/1     Running   0          2m59s   10.244.0.6   minikube   <none>           <none>
+pod-info-app-5b77d876fd-nh8x6   1/1     Running   0          11m     10.244.0.4   minikube   <none>           <none>
+pod-info-app-5b77d876fd-x4hns   1/1     Running   0          11m     10.244.0.3   minikube   <none>           <none>
+
+######## kubectl get svc ########
+NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP        12m   <none>
+pod-info-service   NodePort    10.105.102.92   <none>        80:30080/TCP   11m   app=pod-info-app
+
+######## kubectl get endpoints ########
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME               ENDPOINTS                                         AGE
+pod-info-service   10.244.0.3:5000,10.244.0.4:5000,10.244.0.6:5000   11m
+
+######## kubectl describe deployment ########
+Name:                   pod-info-app
+Namespace:              default
+CreationTimestamp:      Fri, 30 Oct 2026 08:23:52 +0000
+Labels:                 app=pod-info-app
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=pod-info-app
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=pod-info-app
+  Containers:
+   pod-info-app:
+    Image:      pod-info-app:1.0
+    Port:       5000/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     250m
+      memory:  128Mi
+    Requests:
+      cpu:      100m
+      memory:   64Mi
+    Liveness:   http-get http://:5000/health delay=10s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Readiness:  http-get http://:5000/health delay=3s timeout=1s period=5s successThreshold=1 failureThreshold=3
+    Environment:
+      APP_ENV:     kubernetes
+      POD_NAME:     (v1:metadata.name)
+      POD_IP:       (v1:status.podIP)
+      NODE_NAME:    (v1:spec.nodeName)
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   pod-info-app-5b77d876fd (3/3 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  11m    deployment-controller  Scaled up replica set pod-info-app-5b77d876fd from 0 to 3
+  Normal  ScalingReplicaSet  2m41s  deployment-controller  Scaled up replica set pod-info-app-5b77d876fd from 3 to 5
+  Normal  ScalingReplicaSet  2m30s  deployment-controller  Scaled down replica set pod-info-app-5b77d876fd from 5 to 3
+
+######## kubectl describe service ########
+Name:                     pod-info-service
+Namespace:                default
+Labels:                   app=pod-info-app
+Annotations:              <none>
+Selector:                 app=pod-info-app
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.105.102.92
+IPs:                      10.105.102.92
+Port:                     http  80/TCP
+TargetPort:               5000/TCP
+NodePort:                 http  30080/TCP
+Endpoints:                10.244.0.4:5000,10.244.0.3:5000,10.244.0.6:5000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>

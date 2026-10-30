@@ -1,0 +1,20 @@
+
+######## Scaling test: 3 -> 5 -> 3 replicas ########
+deployment.apps/pod-info-app scaled
+Waiting for deployment "pod-info-app" rollout to finish: 3 of 5 updated replicas are available...
+Waiting for deployment "pod-info-app" rollout to finish: 4 of 5 updated replicas are available...
+deployment "pod-info-app" successfully rolled out
+NAME                            READY   STATUS    RESTARTS   AGE
+pod-info-app-5b77d876fd-5zb8f   1/1     Running   0          7s
+pod-info-app-5b77d876fd-dj7d2   1/1     Running   0          7s
+pod-info-app-5b77d876fd-jn788   1/1     Running   0          15s
+pod-info-app-5b77d876fd-nh8x6   1/1     Running   0          12m
+pod-info-app-5b77d876fd-x4hns   1/1     Running   0          12m
+deployment.apps/pod-info-app scaled
+deployment "pod-info-app" successfully rolled out
+NAME                            READY   STATUS        RESTARTS   AGE
+pod-info-app-5b77d876fd-5zb8f   1/1     Terminating   0          7s
+pod-info-app-5b77d876fd-dj7d2   1/1     Terminating   0          7s
+pod-info-app-5b77d876fd-jn788   1/1     Running       0          15s
+pod-info-app-5b77d876fd-nh8x6   1/1     Running       0          12m
+pod-info-app-5b77d876fd-x4hns   1/1     Running       0          12m

@@ -1,0 +1,12 @@
+
+######## 10 requests to the Service (watch the pod name change = load balancing) ########
+request 01 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 02 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 03 -> pod-info-app-5b77d876fd-8slxz 10.244.0.6
+request 04 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 05 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 06 -> pod-info-app-5b77d876fd-nh8x6 10.244.0.4
+request 07 -> pod-info-app-5b77d876fd-8slxz 10.244.0.6
+request 08 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 09 -> pod-info-app-5b77d876fd-x4hns 10.244.0.3
+request 10 -> pod-info-app-5b77d876fd-8slxz 10.244.0.6

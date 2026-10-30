@@ -1,0 +1,8 @@
+
+######## Self-healing test: delete one pod, Kubernetes recreates it ########
+Deleting pod-info-app-5b77d876fd-8slxz
+pod "pod-info-app-5b77d876fd-8slxz" deleted from default namespace
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+pod-info-app-5b77d876fd-jn788   1/1     Running   0          8s    10.244.0.9   minikube   <none>           <none>
+pod-info-app-5b77d876fd-nh8x6   1/1     Running   0          11m   10.244.0.4   minikube   <none>           <none>
+pod-info-app-5b77d876fd-x4hns   1/1     Running   0          11m   10.244.0.3   minikube   <none>           <none>
